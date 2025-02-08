@@ -1,4 +1,4 @@
-import pytest
+import unittest
 from calc import add, sub
 
 class TestCalc(unittest.TestCase):
@@ -16,4 +16,4 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(sub(0, 0), 0)
 
 if __name__ == '__main__':
-    pytest.main()
+    unittest.main()
