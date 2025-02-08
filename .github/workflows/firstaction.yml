@@ -1,0 +1,10 @@
+name: First Action
+on: workflow_dispatch
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: greeting
+        run: echo "Hola amigo"
+      - name: farewell
+        run: echo "Adios"
