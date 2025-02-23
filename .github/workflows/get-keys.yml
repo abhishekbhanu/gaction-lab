@@ -1,6 +1,9 @@
 name: "Get environment variables and secrets"
 
-on: workflow_dispatch
+on:
+    push:
+        branches:
+            - feature/*
 
 jobs:
   get-secrets:
