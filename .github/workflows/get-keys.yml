@@ -1,0 +1,14 @@
+name: "Get environment variables and secrets"
+
+on: workflow_dispatch
+
+jobs:
+  get-secrets:
+    name: "Get secrets"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Connect to vault"
+        run: echo "connecting to vault"
+        
+      - name: "Get environment variables"
+        run: echo "Getting environment variables"
