@@ -1,0 +1,22 @@
+name: Update ECS
+
+on: workflow_dispatch
+
+jobs:
+  pull-latest-tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.get-latest-tag.outputs.tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Get latest tag
+        id: get-latest-tag
+        run: |
+          echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
+          echo "::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)"
+
+      - name: Print latest tag
+        run: |
+          echo "Latest tag: ${{ steps.get-latest-tag.outputs.tag }}"
