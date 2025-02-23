@@ -1,0 +1,27 @@
+name: Update ECS
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  pull-latest-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Get latest tag
+        id: get-latest-tag
+        run: echo "::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)"
+
+      - name: Print latest tag
+        run: echo "Latest tag: ${{ steps.get-latest-tag.outputs.tag }}"
+
+      - name: Pull latest tag
+        run: git checkout ${{ steps.get-latest-tag.outputs.tag }}
