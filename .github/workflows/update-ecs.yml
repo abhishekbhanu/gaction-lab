@@ -9,11 +9,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Fetch all tags
+        run: git fetch --tags
+
       - name: Get latest tag
         id: get-latest-tag
         run: |
-          echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_OUTPUT
+          TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "none")
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Print latest tag
         run: |
-          echo "Latest tag: ${{ steps.get-latest-tag.outputs.tag }}"
+          if [ "${{ steps.get-latest-tag.outputs.tag }}" != "none" ]; then
+            echo "Latest tag: ${{ steps.get-latest-tag.outputs.tag }}"
+          else
+            echo "No tags found."
+          fi
