@@ -16,6 +16,7 @@ runs:
   steps:
     - name: "Process inputs"
       id: process
+      shell: bash
       run: |
         echo "Processing inputs..."
         current_image_tag="Processed: ${{ inputs.image_tag }}"
