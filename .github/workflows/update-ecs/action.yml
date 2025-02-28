@@ -1,0 +1,25 @@
+name: "This is a composite action"
+
+description: "A composite action that accepts two inputs and provides one output"
+
+inputs:
+  workspace_id:
+    description: "The workspace ID"
+    required: true
+  image_tag:
+    description: "The image tag"
+    required: true
+
+outputs:
+  current_image_tag:
+    description: "The current image tag"
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Process inputs"
+      id: process
+      run: |
+        echo "Processing inputs..."
+        current_image_tag="Processed: ${{ inputs.image_tag }}"
+        echo "current_image_tag=$current_image_tag" >> $GITHUB_OUTPUT

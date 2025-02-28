@@ -1,27 +1,22 @@
 name: Update ECS
-
-on: workflow_dispatch
+Description: Update ECS service with new task definition
+on:
+  push:
+    branches:
+      - feature/ga-branch-test
 
 jobs:
-  pull-latest-tag:
+  update-ecs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Fetch all tags
-        run: git fetch --tags
-
-      - name: Get latest tag
-        id: get-latest-tag
+      - name: Update ECS
+        uses: ./.github/workflows/update-ecs
+        with:
+          workspace_id: "wf-aavnsvdfjed"
+          image_tag: "v1.0.0"
+      - name: Print outputs
         run: |
-          TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "none")
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
-
-      - name: Print latest tag
-        run: |
-          if [ "${{ steps.get-latest-tag.outputs.tag }}" != "none" ]; then
-            echo "Latest tag: ${{ steps.get-latest-tag.outputs.tag }}"
-          else
-            echo "No tags found."
-          fi
+          echo "Previous image tag: ${{ env.previous_image_tag }}"
+          echo "Current image tag: ${{ env.current_image_tag }}"
