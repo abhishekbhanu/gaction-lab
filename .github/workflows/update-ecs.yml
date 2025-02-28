@@ -17,6 +17,7 @@ jobs:
           workspace_id: "wf-aavnsvdfjed"
           image_tag: "v1.0.0"
       - name: Print outputs
+        shell: bash   
         run: |
           echo "Previous image tag: ${{ env.previous_image_tag }}"
           echo "Current image tag: ${{ env.current_image_tag }}"
