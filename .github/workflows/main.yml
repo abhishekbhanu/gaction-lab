@@ -8,7 +8,11 @@ on:
 jobs:
   call-env-test-1:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Call env_test with first set of values
         uses: ./.github/workflows/env_test.yml
         with:
