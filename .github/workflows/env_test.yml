@@ -12,13 +12,15 @@ jobs:
               run: |
                     {
                     echo "ENV_VAR<<EOF"
-                     "123"
-                     echo "EOF"} >> $GITHUB_ENV
+                     123
+                     echo EOF
+                    } >> $GITHUB_ENV
             - name: Check environment variables
               run: |
                     {
                     echo "ENV_VAR<<EOF"
-                    echo "234"
-                    echo "EOF"} >> $GITHUB_ENV
+                     234
+                    echo EOF
+                    } >> $GITHUB_ENV
             - name: Print environment variables
               run: echo "$ENV_VAR"
