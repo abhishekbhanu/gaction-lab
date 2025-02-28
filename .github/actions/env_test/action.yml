@@ -25,11 +25,14 @@ runs:
       run: |
         echo "ENV_VAR1=${{ inputs.var1 }}" >> $GITHUB_ENV
         echo "output_var1=${{ inputs.var1 }}" >> $GITHUB_OUTPUT
+      shell: bash
     - name: Check environment variables
       run: |
         echo "ENV_VAR2=${{ inputs.var2 }}" >> $GITHUB_ENV
         echo "output_var2=${{ inputs.var2 }}" >> $GITHUB_OUTPUT
+      shell: bash
     - name: Print environment variables
       run: |
         echo "ENV_VAR1: $ENV_VAR1"
         echo "ENV_VAR2: $ENV_VAR2"
+      shell: bash
