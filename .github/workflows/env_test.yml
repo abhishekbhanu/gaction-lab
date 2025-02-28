@@ -1,22 +1,28 @@
 name: 'Test environment variables'
 
 on:
-    push:
-        branches:
-            - env_test
+  workflow_call:
+    inputs:
+      var1:
+        description: 'Environment variable 1'
+        type: string
+        required: true
+        default: '123'
+      var2:
+        description: 'Environment variable 2'
+        type: string
+        required: true
+        default: '456'
+
 jobs:
-    Add-Print:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Set up environment variables
-              run: |
-                   echo "ENV_VAR<<EOF">> "$GITHUB_ENV"
-                     echo "123">> "$GITHUB_ENV"
-                    echo "EOF">> "$GITHUB_ENV"
-            - name: Check environment variables
-              run: |
-                    echo "ENV_VAR<<EOF">> "$GITHUB_ENV"
-                     echo "234">> "$GITHUB_ENV"
-                    echo "EOF">> "$GITHUB_ENV"
-            - name: Print environment variables
-              run: echo "$ENV_VAR"
+  Add-Print:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up environment variables
+        run: |
+          echo "ENV_VAR=${{ inputs.var1 }}" >> $GITHUB_ENV
+      - name: Check environment variables
+        run: |
+          echo "ENV_VAR=${{ inputs.var2 }}" >> $GITHUB_ENV
+      - name: Print environment variables
+        run: echo "${{ env.ENV_VAR }}"

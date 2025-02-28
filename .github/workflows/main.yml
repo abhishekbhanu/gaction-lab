@@ -1,0 +1,21 @@
+name: 'Main Workflow'
+
+on:
+  push:
+    branches:
+      - env_test
+
+jobs:
+  call-env-test-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call env_test with first set of values
+        uses: ./.github/workflows/env_test.yml
+        with:
+          var1: 'abc'
+          var2: 'xyz'
+      - name: Call env_test with second set of values
+        uses: ./.github/workflows/env_test.yml
+        with:
+          var1: '111'
+          var2: '222'
