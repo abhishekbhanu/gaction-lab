@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
       - name: Call env_test with first set of values
         uses: ./.github/workflows/env_test.yml
         with:
