@@ -21,3 +21,15 @@ jobs:
         shell: bash   
         run: |
             echo "Current image tag: ${{ steps.update-ecs.outputs.current_image_tag }}"
+
+      - name: fail-step
+        run: exit 1
+        shell: bash
+      - name: revert-step
+        run: echo "Reverting the image tag changes"
+        shell: bash
+        if: failure()
+        uses: ./.github/workflows/update-ecs
+        with:
+          workspace_id: "wf-aavnsvdfjed"
+          image_tag: "v1.0.1"
