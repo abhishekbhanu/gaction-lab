@@ -1,0 +1,16 @@
+name: 'Test environment variables'
+
+on:
+    push:
+        branches:
+            - env_test
+jobs:
+    Add-Print:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up environment variables
+              run: echo "ENV_VAR=123" >> $GITHUB_ENV
+            - name: Check environment variables
+              run: echo "$ENV_VAR=456" >> $GITHUB_ENV
+            - name: Print environment variables
+              run: echo "$ENV_VAR"
