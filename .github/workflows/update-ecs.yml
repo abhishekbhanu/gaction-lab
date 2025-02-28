@@ -1,5 +1,5 @@
 name: Update ECS
-Description: Update ECS service with new task definition
+
 on:
   push:
     branches:
