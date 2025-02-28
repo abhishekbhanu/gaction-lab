@@ -19,4 +19,4 @@ jobs:
       - name: Print outputs
         shell: bash   
         run: |
-          echo "Current image tag: ${{ env.current_image_tag }}"
+            echo "Current image tag: ${{ steps.update-ecs.outputs.current_image_tag }}"
