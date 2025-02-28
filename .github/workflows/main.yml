@@ -16,12 +16,12 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Call env_test with first set of values
-        uses: ./.github/workflows/env_test
+        uses: ./.github/actions/env_test
         with:
           var1: 'abc'
           var2: 'xyz'
       - name: Call env_test with second set of values
-        uses: ./.github/workflows/env_test
+        uses: ./.github/actions/env_test
         with:
           var1: '111'
           var2: '222'
