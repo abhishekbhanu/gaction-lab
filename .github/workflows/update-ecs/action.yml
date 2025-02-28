@@ -1,7 +1,5 @@
-name: "This is a composite action"
-
-description: "A composite action that accepts two inputs and provides one output"
-
+name: 'Update ECS'
+description: 'Update ECS service'
 inputs:
   workspace_id:
     description: "The workspace ID"
@@ -9,7 +7,6 @@ inputs:
   image_tag:
     description: "The image tag"
     required: true
-
 outputs:
   current_image_tag:
     description: "The current image tag"
