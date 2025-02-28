@@ -12,7 +12,7 @@ jobs:
               run: |
                     {
                     echo "ENV_VAR<<EOF"
-                    echo "123"
+                     "123"
                      echo "EOF"} >> $GITHUB_ENV
             - name: Check environment variables
               run: |
