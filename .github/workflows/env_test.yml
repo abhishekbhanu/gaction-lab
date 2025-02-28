@@ -10,17 +10,13 @@ jobs:
         steps:
             - name: Set up environment variables
               run: |
-                    {
-                    echo 'ENV_VAR<<EOF'
-                     123
-                     echo EOF
-                    } >> "$GITHUB_ENV"
+                   echo "ENV_VAR<<EOF">> "$GITHUB_ENV"
+                     echo "123">> "$GITHUB_ENV"
+                    echo "EOF">> "$GITHUB_ENV"
             - name: Check environment variables
               run: |
-                    {
-                    echo 'ENV_VAR<<EOF'
-                     234
-                    echo EOF
-                    } >> "$GITHUB_ENV"
+                    echo "ENV_VAR<<EOF">> "$GITHUB_ENV"
+                     echo "234">> "$GITHUB_ENV"
+                    echo "EOF">> "$GITHUB_ENV"
             - name: Print environment variables
               run: echo "$ENV_VAR"
