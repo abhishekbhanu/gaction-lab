@@ -19,4 +19,6 @@ runs:
       shell: bash
       run: |
         echo "Processing inputs..."
+        echo "workspace_id=${{ inputs.workspace_id }}"
+        echo "image_tag=${{ inputs.image_tag }}"
         echo "current_image_tag=${{ inputs.image_tag }}" >> $GITHUB_OUTPUT
