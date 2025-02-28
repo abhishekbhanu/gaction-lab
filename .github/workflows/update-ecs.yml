@@ -23,11 +23,11 @@ jobs:
             echo "Current image tag: ${{ steps.update-ecs.outputs.current_image_tag }}"
 
       - name: fail-step
-        run: exit 1
+        run: |
+          echo "Failing the step"
+          exit 1
         shell: bash
       - name: revert-step
-        run: echo "Reverting the image tag changes"
-        shell: bash
         if: failure()
         uses: ./.github/workflows/update-ecs
         with:
