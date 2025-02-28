@@ -19,5 +19,4 @@ runs:
       shell: bash
       run: |
         echo "Processing inputs..."
-        current_image_tag="Processed: ${{ inputs.image_tag }}"
-        echo "current_image_tag=$current_image_tag" >> $GITHUB_OUTPUT
+        echo "current_image_tag=${{ inputs.image_tag }}" >> $GITHUB_OUTPUT
