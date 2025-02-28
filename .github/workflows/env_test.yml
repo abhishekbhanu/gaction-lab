@@ -1,4 +1,4 @@
-name: 'Test environment variables'
+name: 'Resuable workflow'
 
 on:
   workflow_call:
