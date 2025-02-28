@@ -10,7 +10,7 @@ inputs:
 outputs:
   current_image_tag:
     description: "The current image tag"
-    value: ${{ env.current_image_tag }}
+    value:  ${{ steps.process.outputs.current_image_tag }}
 
 runs:
   using: "composite"
