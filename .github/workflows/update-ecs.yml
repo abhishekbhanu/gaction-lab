@@ -12,6 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Update ECS
+        id: update-ecs
         uses: ./.github/workflows/update-ecs
         with:
           workspace_id: "wf-aavnsvdfjed"
