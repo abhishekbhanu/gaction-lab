@@ -37,8 +37,8 @@ runs:
     - name: Print environment variables
       id: print-env-vars
       run: |
-        echo "{{ env.ENV_VAR1 }}"
-        echo "{{ env.ENV_VAR2 }}"
-        echo "{{ steps.set-env-vars.outputs.output_var1 }}"
-        echo "{{ steps.check-env-vars.outputs.output_var2 }}"      
+        echo "${{ env.ENV_VAR1 }}"
+        echo "${{ env.ENV_VAR2 }}"
+        echo "${{ steps.set-env-vars.outputs.output_var1 }}"
+        echo "${{ steps.check-env-vars.outputs.output_var2 }}"      
       shell: bash
