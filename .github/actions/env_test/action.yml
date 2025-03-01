@@ -15,6 +15,7 @@ inputs:
 outputs:
   output_var1:
     description: 'Output variable 1'
+    value: 
   output_var2:
     description: 'Output variable 2'
 
@@ -22,17 +23,22 @@ runs:
   using: "composite"
   steps:
     - name: Set up environment variables
+      id: set-env-vars
       run: |
         echo "ENV_VAR1=${{ inputs.var1 }}" >> $GITHUB_ENV
         echo "output_var1=${{ inputs.var1 }}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Check environment variables
+      id: check-env-vars
       run: |
         echo "ENV_VAR2=${{ inputs.var2 }}" >> $GITHUB_ENV
         echo "output_var2=${{ inputs.var2 }}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Print environment variables
+      id: print-env-vars
       run: |
-        echo "ENV_VAR1: $ENV_VAR1"
-        echo "ENV_VAR2: $ENV_VAR2"
+        echo "{{ env.ENV_VAR1 }}"
+        echo "{{ env.ENV_VAR2 }}"
+        echo "{{ steps.set-env-vars.outputs.output_var1 }}"
+        echo "{{ steps.check-env-vars.outputs.output_var2 }}"      
       shell: bash
