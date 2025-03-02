@@ -1,0 +1,29 @@
+name: 'Steps Test Workflow'
+
+on:
+  push:
+    branches:
+      - update-ecs
+
+jobs:
+  steps-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Echo message
+        id: step1
+        shell: bash
+        run: | 
+            echo "This is step 1"
+
+      - name: Step 2 - Designed to fail
+        id: step2
+        shell: bash
+        run: |
+            echo "This is step 2"
+            exit 1
+
+      - name: Step 3 - Print conclusion
+        if: ${{ steps.step1.conclusion == 'success' && steps.step2.conclusion == 'failure' }}
+        run: |
+            echo "Conclusion: Steps 1 and 2 have been executed."
+    
