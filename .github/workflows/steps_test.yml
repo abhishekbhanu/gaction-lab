@@ -3,7 +3,7 @@ name: 'Steps Test Workflow'
 on:
   push:
     branches:
-      - update-ecs
+      - env_test
 
 jobs:
   steps-test:
