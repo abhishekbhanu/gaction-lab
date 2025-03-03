@@ -1,0 +1,36 @@
+name: 'Environment Checkout Workflow'
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment'
+        required: true
+        default: 'develop'
+        type: choice
+        options:
+          - develop
+          - prod
+
+jobs:
+  fetch-env-vars:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch environment variables
+        id: fetch_env_vars
+        shell: bash
+        run: |
+          echo "Fetching environment variables for ${{ github.event.inputs.environment }}"
+          echo "workspace_id=${{ var.workspace_id }}" >> $GITHUB_ENV
+          echo "workspace_name=${{ var.workspace_name }}" >> $GITHUB_ENV
+
+      - name: Display environment variables
+        shell: bash
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "workspace_id: $workspace_id"
+          echo "workspace_name: $workspace_name"
