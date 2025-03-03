@@ -25,8 +25,8 @@ jobs:
         shell: bash
         run: |
           echo "Fetching environment variables for ${{ github.event.inputs.environment }}"
-          echo "workspace_id=${{ var.workspace_id }}" >> $GITHUB_ENV
-          echo "workspace_name=${{ var.workspace_name }}" >> $GITHUB_ENV
+          echo "workspace_id=${{ vars.workspace_id }}" >> $GITHUB_ENV
+          echo "workspace_name=${{ vars.workspace_name }}" >> $GITHUB_ENV
 
       - name: Display environment variables
         shell: bash
