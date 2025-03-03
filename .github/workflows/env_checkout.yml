@@ -1,21 +1,12 @@
 name: 'Environment Checkout Workflow'
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Select the environment'
-        required: true
-        default: 'develop'
-        type: choice
-        options:
-          - develop
-          - prod
+  workflow_dispatch
 
 jobs:
   fetch-env-vars:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || github.ref == 'refs/heads/release' && 'qa' || 'develop' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
