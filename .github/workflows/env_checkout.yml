@@ -32,6 +32,5 @@ jobs:
         shell: bash
         run: |
           echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "DB_HOST: $workspace_id"
-          echo "DB_USER: $workspace_name"
-          
+          echo "workspace_id: $workspace_id"
+          echo "workspace_name: $workspace_name"
