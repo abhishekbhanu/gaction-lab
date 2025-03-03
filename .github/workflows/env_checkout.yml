@@ -34,3 +34,4 @@ jobs:
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "DB_HOST: $workspace_id"
           echo "DB_USER: $workspace_name"
+          
