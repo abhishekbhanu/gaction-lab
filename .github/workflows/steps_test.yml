@@ -1,9 +1,16 @@
 name: 'Steps Test Workflow'
 
 on:
-  push:
-    branches:
-      - env_test
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'The image tag'
+        required: true
+        default: '0.1.0'
+      image_id:
+        description: 'The image ID'
+        required: true
+        default: 'v-jafklmn'
 
 jobs:
   steps-test:
@@ -14,25 +21,37 @@ jobs:
         shell: bash
         run: | 
             echo "This is step 1"
+            echo "ecr_image_tag=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+            echo "ecr_image_id=${{ github.event.inputs.image_id }}" >> $GITHUB_ENV
+            echo "After Step 1 writes:"
+            cat $GITHUB_ENV || echo "Nothing yet (expected in same step)"
 
-            echo "ecr_image_tag=0.1.0" >> $GITHUB_ENV
-
-      - name: Step 2 - Designed to test
+      - name: Step 2 - Designed to fail
         id: step2
         if: success()
         shell: bash
         run: |
             echo "This is step 2"
-            echo ${{ env.ecr_image_tag }}
+            echo "ecr_image_tag from Step 1: ${{ env.ecr_image_tag }}"
             echo "ecr_image_tag=0.1.1" >> $GITHUB_ENV
+            echo "ecr_image_id=v-jafklmO" >> $GITHUB_ENV
+            echo "After Step 2 write:"
+            cat $GITHUB_ENV || echo "Nothing yet (expected in same step)"
+            exit 1  # This will cause the step to fail
+
       - name: Step 3 - Print conclusion
-        if: success()
+        if: failure() || cancelled()
         shell: bash
         run: |
-            echo "Conclusion: Steps 1 and 2 have been executed."
-            echo "Step 1: ${{ steps.step1.conclusion }}"
-            echo "Step 2: ${{ steps.step2.conclusion }}"
-            echo "${{ steps.step1.conclusion == 'success' && steps.step2.conclusion == 'failure' }}"
-            echo ${{ env.ecr_image_tag }}
-            cat $GITHUB_ENV
-    
+            echo "Conclusion: Step 1 succeeded and Step 2 failed."
+            echo "Step 1 conclusion: ${{ steps.step1.conclusion }}"
+            echo "Step 2 conclusion: ${{ steps.step2.conclusion }}"
+            if [ -f "$GITHUB_ENV" ]; then
+              echo "File exists. Contents:"
+              cat $GITHUB_ENV || echo " Cat failed"
+              echo "End of GITHUB_ENV contents"
+              echo "ecr_image_tag from env: $ecr_image_tag"
+              echo "ecr_image_id from env: $ecr_image_id"
+            else
+              echo "GITHUB_ENV file not found!"
+            fi
