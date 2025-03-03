@@ -3,10 +3,13 @@ name: 'Environment Checkout Workflow'
 on:
   workflow_dispatch
 
+env:
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || github.ref == 'refs/heads/release' && 'qa' || 'develop' }}
+
+
 jobs:
   fetch-env-vars:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || github.ref == 'refs/heads/release' && 'qa' || 'develop' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,3 +28,14 @@ jobs:
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "workspace_id: $workspace_id"
           echo "workspace_name: $workspace_name"
+  summary:
+    runs-on: ubuntu-latest
+    needs: fetch-env-vars
+    steps:
+        - name: summary
+          run: |
+             echo "Summary"
+             echo "workspace_id=${{ vars.workspace_id }}"
+             echo "workspace_name=${{ vars.workspace_name }}" 
+
+
