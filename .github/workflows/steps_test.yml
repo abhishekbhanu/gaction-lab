@@ -12,6 +12,15 @@ on:
         required: true
         default: 'v-jafklmn'
 
+      dry_run:
+        description: 'Run the workflow without executing the steps'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
 jobs:
   steps-test:
     runs-on: ubuntu-latest
