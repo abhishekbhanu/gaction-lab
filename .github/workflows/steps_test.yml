@@ -1,5 +1,5 @@
 name: 'Steps Test Workflow'
-
+description: 'Test the steps and their conclusions'
 on:
   workflow_dispatch:
     inputs:
