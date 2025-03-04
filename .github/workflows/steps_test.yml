@@ -52,7 +52,7 @@ jobs:
         if: failure() || cancelled()
         shell: bash
         run: |
-            echo "dry_run:${{ inputs.dry_run }}"
+            echo "dry_run:${{ github.event.inputs.dry_run }}"
             echo "Conclusion: Step 1 succeeded and Step 2 failed."
             echo "Step 1 conclusion: ${{ steps.step1.conclusion }}"
             echo "Step 2 conclusion: ${{ steps.step2.conclusion }}"
